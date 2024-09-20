@@ -32,8 +32,8 @@ SceneNames = {
 
 @matcher.handle()
 async def inspect(session: Uninfo):
-    adapter = session.adapter if isinstance(session.adapter, SupportAdapter) else str(session.adapter)
-    scope = session.scope if isinstance(session.scope, SupportScope) else str(session.scope)
+    adapter = session.adapter.name if isinstance(session.adapter, SupportAdapter) else str(session.adapter)
+    scope = session.scope.name if isinstance(session.scope, SupportScope) else str(session.scope)
     texts = [
         f"平台名: {adapter} | {scope}",
         f"用户ID: {session.user.name + ' | ' if session.user.name else ''}{session.user.id}",
