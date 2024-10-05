@@ -1,11 +1,13 @@
-from nonebot import on_command
 from nonebot.plugin import PluginMetadata, inherit_supported_adapters, require
 
 require("nonebot_plugin_uninfo")
+require("nonebot_plugin_alconna")
 
+from nonebot_plugin_alconna import Command, UniMessage
 from nonebot_plugin_uninfo import Uninfo
 from nonebot_plugin_uninfo.constraint import SupportAdapter, SupportScope
 
+from .i18n import Lang
 
 __plugin_meta__ = PluginMetadata(
     "inspect",
@@ -13,50 +15,61 @@ __plugin_meta__ = PluginMetadata(
     "/inspect",
     "application",
     "https://github.com/RF-Tar-Railt/nonebot-plugin-inspect",
-    supported_adapters=inherit_supported_adapters("nonebot_plugin_uninfo")
+    supported_adapters=inherit_supported_adapters("nonebot_plugin_uninfo", "nonebot_plugin_alconna"),
 )
 
 
-matcher = on_command("inspect", priority=1, block=True)
+matcher = Command("inspect").build(priority=1, block=True)
 
 
 SceneNames = {
-    "PRIVATE": "私聊",
-    "GROUP": "群聊",
-    "GUILD": "频道",
-    "CHANNEL_TEXT": "文字子频道",
-    "CHANNEL_VOICE": "语音子频道",
-    "CHANNEL_CATEGORY": "频道分类",
+    "PRIVATE": Lang.nonebot_plugin_inspect.scene.private(),
+    "GROUP": Lang.nonebot_plugin_inspect.scene.group(),
+    "GUILD": Lang.nonebot_plugin_inspect.scene.guild(),
+    "CHANNEL_TEXT": Lang.nonebot_plugin_inspect.scene.channel_text(),
+    "CHANNEL_VOICE": Lang.nonebot_plugin_inspect.scene.channel_voice(),
+    "CHANNEL_CATEGORY": Lang.nonebot_plugin_inspect.scene.channel_category(),
 }
 
 
 @matcher.handle()
 async def inspect(session: Uninfo):
-    adapter = session.adapter.name if isinstance(session.adapter, SupportAdapter) else str(session.adapter)
-    scope = session.scope.name if isinstance(session.scope, SupportScope) else str(session.scope)
-    texts = [
-        f"平台名: {adapter} | {scope}",
-        f"用户ID: {session.user.name + ' | ' if session.user.name else ''}{session.user.id}",
-        f"自身ID: {session.self_id}",
-        f"事件场景: {SceneNames[session.scene.type.name]}",
-    ]
+    adapter = session.adapter.value if isinstance(session.adapter, SupportAdapter) else str(session.adapter)
+    scope = session.scope.value if isinstance(session.scope, SupportScope) else str(session.scope)
+    texts = (
+        UniMessage
+        .i18n(Lang.nonebot_plugin_inspect.platform, adapter=adapter, scope=scope)
+        .i18n(Lang.nonebot_plugin_inspect.self, self_id=session.self_id)
+        .i18n(Lang.nonebot_plugin_inspect.user, user_id=f"{session.user.name + ' | ' if session.user.name else ''}{session.user.id}")
+        .i18n(Lang.nonebot_plugin_inspect.scene.name, scene=SceneNames[session.scene.type.name])
+    )
     if session.scene.parent:
         if session.scene.is_private:
-            texts.append(
-                f"群组 ID: {session.scene.parent.name + ' | ' if session.scene.parent.name else ''}{session.scene.parent.id}"
+            texts.i18n(
+                Lang.nonebot_plugin_inspect.group, group_id=f"{session.scene.parent.name + ' | ' if session.scene.parent.name else ''}{session.scene.parent.id}"
             )
         else:
-            texts.append(
-                f"频道 ID: {session.scene.parent.name + ' | ' if session.scene.parent.name else ''}{session.scene.parent.id}"
+            texts.i18n(
+                Lang.nonebot_plugin_inspect.guild, channel_id=f"{session.scene.parent.name + ' | ' if session.scene.parent.name else ''}{session.scene.parent.id}"
             )
     if session.scene.is_group:
-        texts.append(f"群组 ID: {session.scene.name + ' | ' if session.scene.name else ''}{session.scene.id}")
+        texts.i18n(
+            Lang.nonebot_plugin_inspect.group, group_id=f"{session.scene.name + ' | ' if session.scene.name else ''}{session.scene.id}"
+        )
     elif session.scene.is_guild:
-        texts.append(f"频道 ID: {session.scene.name + ' | ' if session.scene.name else ''}{session.scene.id}")
+        texts.i18n(
+            Lang.nonebot_plugin_inspect.guild, channel_id=f"{session.scene.name + ' | ' if session.scene.name else ''}{session.scene.id}"
+        )
     elif session.scene.is_private:
-        texts.append(f"私信 ID: {session.scene.name + ' | ' if session.scene.name else ''}{session.scene.id}")
+        texts.i18n(
+            Lang.nonebot_plugin_inspect.private, private_id=f"{session.scene.name + ' | ' if session.scene.name else ''}{session.scene.id}"
+        )
     else:
-        texts.append(f"子频道 ID: {session.scene.name + ' | ' if session.scene.name else ''}{session.scene.id}")
+        texts.i18n(
+            Lang.nonebot_plugin_inspect.channel, channel_id=f"{session.scene.name + ' | ' if session.scene.name else ''}{session.scene.id}"
+        )
     if session.member:
-        texts.append(f"成员 ID: {session.member.nick + ' | ' if session.member.nick else ''}{session.member.id}")
-    await matcher.send("\n".join(texts))
+        texts.i18n(
+            Lang.nonebot_plugin_inspect.member, member_id=f"{session.member.nick + ' | ' if session.member.nick else ''}{session.member.id}"
+        )
+    await matcher.send(texts)
