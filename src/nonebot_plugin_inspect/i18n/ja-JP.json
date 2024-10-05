@@ -1,0 +1,24 @@
+{
+  "$schema": ".lang.schema.json",
+  "nonebot_plugin_inspect": {
+    "invalid": "参数无法解析。",
+    "description": "查看用户、群组或频道的详细信息",
+    "platform": "平台名: {adapter} | {scope}",
+    "self": "自身ID: {self_id}",
+    "user": "用户ID: {user_id}",
+    "group": "群组ID: {group_id}",
+    "guild": "频道ID: {guild_id}",
+    "private": "私信ID: {private_id}",
+    "member": "成员ID: {member_id}",
+    "channel": "子频道ID: {channel_id}",
+    "scene": {
+      "name": "事件场景: {scene}",
+      "private": "私聊",
+      "group": "群聊",
+      "guild": "频道",
+      "channel_text": "文字子频道",
+      "channel_voice": "语音子频道",
+      "channel_category": "频道分类"
+    }
+  }
+}

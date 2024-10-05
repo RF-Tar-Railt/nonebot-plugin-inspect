@@ -1,0 +1,24 @@
+{
+  "$schema": ".lang.schema.json",
+  "nonebot_plugin_inspect": {
+    "invalid": "Не смог разобрать аргументы.",
+    "description": "Просмотр сведений о пользователях, группах или каналах",
+    "platform": "Название платформы: {adapter} | {scope}",
+    "self": "Идентификатор себя: {self_id}",
+    "user": "Идентификатор Пользователя: {user_id}",
+    "group": "Идентификатор группы: {group_id}",
+    "guild": "Идентификатор гильдии: {guild_id}",
+    "private": "Идентификатор приватного чата: {private_id}",
+    "member": "Идентификатор участника: {member_id}",
+    "channel": "Идентификатор Канала: {channel_id}",
+    "scene": {
+      "name": "Текущая сцена: {scene}",
+      "private": "приватного",
+      "group": "группы",
+      "guild": "гильдии",
+      "channel_text": "Текстовый канал",
+      "channel_voice": "Голосовой канал",
+      "channel_category": "Категория канала"
+    }
+  }
+}

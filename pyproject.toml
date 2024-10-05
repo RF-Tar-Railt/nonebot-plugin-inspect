@@ -1,6 +1,6 @@
 [project]
 name = "nonebot-plugin-inspect"
-version = "0.1.2"
+version = "0.2.0"
 description = "Inspect on any user, group or channel"
 authors = [
     {name = "RF-Tar-Railt", email = "rf_tar_railt@qq.com"},
