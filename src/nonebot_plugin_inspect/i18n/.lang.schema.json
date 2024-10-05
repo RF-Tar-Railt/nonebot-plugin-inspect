@@ -1,0 +1,108 @@
+{
+  "title": "Lang Schema",
+  "description": "Schema for lang file",
+  "type": "object",
+  "properties": {
+    "nonebot_plugin_inspect": {
+      "title": "Nonebot_plugin_inspect",
+      "description": "Scope 'nonebot_plugin_inspect' of lang item",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "description": {
+          "title": "description",
+          "description": "value of lang item type 'description'",
+          "type": "string"
+        },
+        "platform": {
+          "title": "platform",
+          "description": "value of lang item type 'platform'",
+          "type": "string"
+        },
+        "self": {
+          "title": "self",
+          "description": "value of lang item type 'self'",
+          "type": "string"
+        },
+        "scene": {
+          "title": "Scene",
+          "description": "Scope 'scene' of lang item",
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "name": {
+              "title": "name",
+              "description": "value of lang item type 'name'",
+              "type": "string"
+            },
+            "private": {
+              "title": "private",
+              "description": "value of lang item type 'private'",
+              "type": "string"
+            },
+            "group": {
+              "title": "group",
+              "description": "value of lang item type 'group'",
+              "type": "string"
+            },
+            "guild": {
+              "title": "guild",
+              "description": "value of lang item type 'guild'",
+              "type": "string"
+            },
+            "channel_text": {
+              "title": "channel_text",
+              "description": "value of lang item type 'channel_text'",
+              "type": "string"
+            },
+            "channel_voice": {
+              "title": "channel_voice",
+              "description": "value of lang item type 'channel_voice'",
+              "type": "string"
+            },
+            "channel_category": {
+              "title": "channel_category",
+              "description": "value of lang item type 'channel_category'",
+              "type": "string"
+            }
+          }
+        },
+        "user": {
+          "title": "user",
+          "description": "value of lang item type 'user'",
+          "type": "string"
+        },
+        "channel": {
+          "title": "channel",
+          "description": "value of lang item type 'channel'",
+          "type": "string"
+        },
+        "group": {
+          "title": "group",
+          "description": "value of lang item type 'group'",
+          "type": "string"
+        },
+        "guild": {
+          "title": "guild",
+          "description": "value of lang item type 'guild'",
+          "type": "string"
+        },
+        "private": {
+          "title": "private",
+          "description": "value of lang item type 'private'",
+          "type": "string"
+        },
+        "member": {
+          "title": "member",
+          "description": "value of lang item type 'member'",
+          "type": "string"
+        },
+        "invalid": {
+          "title": "invalid",
+          "description": "value of lang item type 'invalid'",
+          "type": "string"
+        }
+      }
+    }
+  }
+}

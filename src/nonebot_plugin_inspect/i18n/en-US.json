@@ -1,0 +1,24 @@
+{
+  "$schema": ".lang.schema.json",
+  "nonebot_plugin_inspect": {
+    "invalid": "Could not parse arguments.",
+    "description": "View details of users, groups or channels",
+    "platform": "Platform Name: {adapter} | {scope}",
+    "self": "Self ID: {self_id}",
+    "user": "User ID: {user_id}",
+    "group": "Group ID: {group_id}",
+    "guild": "Guild ID: {guild_id}",
+    "private": "Private ID: {private_id}",
+    "member": "Member ID: {member_id}",
+    "channel": "Channel ID: {channel_id}",
+    "scene": {
+      "name": "Current Scene: {scene}",
+      "private": "Private",
+      "group": "Group",
+      "guild": "Guild",
+      "channel_text": "Text Channel",
+      "channel_voice": "Voice Channel",
+      "channel_category": "Channel Category"
+    }
+  }
+}

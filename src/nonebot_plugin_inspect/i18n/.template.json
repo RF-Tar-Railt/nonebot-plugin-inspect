@@ -1,0 +1,32 @@
+{
+  "$schema": ".template.schema.json",
+  "scopes": [
+    {
+      "scope": "nonebot_plugin_inspect",
+      "types": [
+        "description",
+        "platform",
+        "self",
+        {
+          "subtype": "scene",
+          "types": [
+            "name",
+            "private",
+            "group",
+            "guild",
+            "channel_text",
+            "channel_voice",
+            "channel_category"
+          ]
+        },
+        "user",
+        "channel",
+        "group",
+        "guild",
+        "private",
+        "member",
+        "invalid"
+      ]
+    }
+  ]
+}

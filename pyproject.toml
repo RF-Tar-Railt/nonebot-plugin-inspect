@@ -7,7 +7,7 @@ authors = [
 ]
 dependencies = [
     "nonebot-plugin-uninfo>=0.3.0",
-    "nonebot-plugin-alconna>=0.52.3",
+    "nonebot-plugin-alconna>=0.53.0",
 ]
 requires-python = ">=3.9"
 readme = "README.md"
@@ -23,3 +23,18 @@ distribution = true
 
 [tool.pdm.build]
 includes = ["src/nonebot_plugin_inspect"]
+
+[tool.pdm.dev-dependencies]
+dev = [
+    "nonebot-adapter-satori>=0.12.6",
+    "nonebot2[httpx,websockets]>=2.3.3",
+]
+
+[tool.nonebot]
+adapters = [
+    { name = "Satori", module_name = "nonebot.adapters.satori" },
+    # { name = "QQ", module_name = "nonebot.adapters.qq" }
+]
+plugins = []
+plugin_dirs = ["src"]
+builtin_plugins = []
